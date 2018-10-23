@@ -5,8 +5,7 @@
 <title>北京城市学院资产管理系统</title>
 </head>
 
-
-	
+<!-- LYH-->
 	
 <style type="text/css">
 	body{
