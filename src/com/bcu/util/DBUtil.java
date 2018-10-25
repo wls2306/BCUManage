@@ -14,7 +14,7 @@ import java.sql.DriverManager;
             Connection conn = null;
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
-                conn = DriverManager.getConnection("jdbc:mysql://localhost/bcu_manage?useUnicode=true&characterEncoding=utf8", "root", "root");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bcu_manage?useUnicode=true&characterEncoding=utf8", "root", "root");
                 return conn;
             } catch (Exception e) {
                 e.printStackTrace();

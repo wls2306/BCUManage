@@ -1,7 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="utf-8" %>
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>北京城市学院资产管理系统</title>
 </head>
 
@@ -89,11 +90,11 @@
 						
 							<div id="login">
 								<div id="title">用户登录</div>
-								<form action="" id="loginform">
+								<form action="login" id="loginform" method="post">
 									  <table cellspacing="10px" >
 										<tr>
-										<td align="right">ID:</td>
-											<td> <input type="text" name="userid" id="userid"> </td>
+										<td align="right">用户名:</td>
+											<td> <input type="text" name="username" id="userid"> </td>
 										</tr>
 										<tr>
 											<td align="right">口令:</td>
@@ -104,7 +105,7 @@
 								</form>
 									<div id="button">  
 										
-										<button type="button" class="btn btn-default btn-xs">登录</button> &nbsp;
+										<button type="button" class="btn btn-default btn-xs" id="submit">登录</button> &nbsp;
 								
 										<button type="button" class="btn btn-default btn-xs">注册</button> &nbsp;
 										
@@ -118,7 +119,14 @@
 	
 	
 </body>
-	
+
+
+<script>
+	$("#submit").click( function () {
+		$("#loginform").submit();
+    } )
+
+</script>
 	
 	
 </html>
