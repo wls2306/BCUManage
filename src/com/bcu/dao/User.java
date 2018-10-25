@@ -4,7 +4,7 @@ package com.bcu.dao;
  *
  *
  */
-public class user {
+public class User {
     private String userName;
     private  String userPassword;
     private  int userType;
@@ -42,7 +42,7 @@ public class user {
         this.userStatus = userStatus;
     }
 
-    public user(String userName, String userPassword, int userType, int userStatus) {
+    public User(String userName, String userPassword, int userType, int userStatus) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userType = userType;
