@@ -1,4 +1,4 @@
-package com.bcu.dao;
+package com.bcu.entity;
 
 /**
  *

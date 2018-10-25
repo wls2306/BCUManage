@@ -1,4 +1,4 @@
-package com.bcu.dao;
+package com.bcu.entity;
 
 public class Equipment {
     private String equId;     //编号
@@ -171,5 +171,6 @@ public class Equipment {
 
     public void setEquBelong(String equBelong) {
         this.equBelong = equBelong;
+
     }
 }
