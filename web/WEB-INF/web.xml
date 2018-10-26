@@ -18,5 +18,26 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>addEqu</servlet-name>
+        <servlet-class>com.bcu.servlet.AddEquipmentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addEqu</servlet-name>
+        <url-pattern>/addEqu</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>SearchEqu</servlet-name>
+        <servlet-class>com.bcu.servlet.SearchEquipmentServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>SearchEqu</servlet-name>
+        <url-pattern>/doSearchEqu</url-pattern>
+    </servlet-mapping>
+
 </web-app>
 

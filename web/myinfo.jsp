@@ -13,6 +13,15 @@
 <head>
     <title>账户信息</title>
 </head>
+
+<style type="text/css">
+    table{
+        border-collapse: collapse;
+    }
+</style>
+
+
+
 <body>
 
     <h2>账号信息</h2>

@@ -12,7 +12,7 @@
 <head>
     <title>北京城市学院资产管理系统</title>
 </head>
-
+<script src="script/jquery-3.3.1.js"></script>
 <style type="text/css">
 
 
@@ -108,7 +108,9 @@
                                                         </c:when>
 
                                                         <c:when test="${list.menuType eq '1'}">
-                                                            <div class="menu-item"> &nbsp; &nbsp;<a href="${list.menuUrl}" target="frame">${list.menuName} </a> </div>
+                                                            <div class="menu-item"> &nbsp; &nbsp; <a href="${list.menuUrl}" target="frame">${list.menuName}</a>
+                                                                
+                                                            </div>
                                                         </c:when>
 
 

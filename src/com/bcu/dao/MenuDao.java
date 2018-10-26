@@ -28,6 +28,7 @@ public class MenuDao {
                 menu.setMenuName(rs.getString(2));
                 menu.setMenuType(rs.getString(3));
                 menu.setMenuStatus(rs.getString(4));
+                menu.setMenuUrl(rs.getString(5));
                 list.add(menu);
             }
                 conn.close();
