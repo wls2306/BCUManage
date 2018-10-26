@@ -1,9 +1,16 @@
 package com.bcu.dao;
 
+import com.bcu.entity.Menu;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class demo {
     public static void main(String[] args) {
-        UserDao u=new UserDao();
-        boolean p=u.checkUser("admin","123456");
-        System.out.println(p);
+       MenuDao m=new MenuDao();
+        ArrayList<Menu> list=m.GetMenu();
+        Menu menu=list.get(2);
+        System.out.println(menu.getMenuName());
+        System.out.println(menu.getMenuType());
     }
 }

@@ -6,7 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="utf-8" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>北京城市学院资产管理系统</title>
@@ -52,16 +53,16 @@
 
     #menu{
         width: 300px;
-       /* height: 1000px;*/
         border-right: black solid 1px;
         display: table-cell;
+        vertical-align: top;
 
     }
 
     #content{
         width: 980px;
         display: table-cell;
-
+        vertical-align: top;
     }
 
     footer{
@@ -75,6 +76,14 @@
         border-top: black solid 1px;
     }
 
+    #menu-content{
+        margin-top: 30px;
+        margin-left: 45px;
+    }
+
+    .menu-item{
+        padding-bottom: 10px;
+    }
 
 </style>
 
@@ -88,12 +97,30 @@
                <!-- <nav id="nav"> </nav>   顶部导航栏 ，暂不使用 -->
                     <div id="row">
                             <div id="menu">
+                                    <div id="menu-content">
+
+                                        <!-- 规定： Type ： 1 为正常菜单链接  2 为 加粗字-->
+                                            <c:forEach var="list" items="${menuList}">
+                                                    <c:choose>
+
+                                                        <c:when test="${list.menuType eq '2'}">
+                                                           <div class="menu-item"> <strong> ${list.menuName} </strong></div>
+                                                        </c:when>
+
+                                                        <c:when test="${list.menuType eq '1'}">
+                                                            <div class="menu-item"> &nbsp; &nbsp;<a href="${list.menuUrl}" target="frame">${list.menuName} </a> </div>
+                                                        </c:when>
 
 
+
+
+                                                    </c:choose>
+                                            </c:forEach>
+                                    </div>
                             </div>
 
                             <div id="content">
-                                <iframe name="frame" width="900px" height="800px" src="login.jsp" frameborder="0" scrolling="1">
+                                <iframe name="frame" width="900px" height="800px" src="myinfo.jsp" frameborder="0" scrolling="1">
                                     您的浏览器不支持HTML5，请升级浏览器再试
                                 </iframe>
 
