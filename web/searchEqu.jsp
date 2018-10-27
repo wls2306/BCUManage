@@ -41,13 +41,13 @@
     <div id="byid">
 
         <div class=" info"> 通过资产编号搜索</div>
-        <div><input type="text" name="id">  <button id="search-I" >搜索</button></div>
+        <div><input type="text" id="id" name="id">  <button id="search-I" >搜索</button></div>
 
     </div>
 
 
     <div id="frame">
-        <iframe id="resultframe" width="850px" height="500px"  frameborder="0"></iframe>
+        <iframe id="resultframe" width="880px" height="500px"  frameborder="0"></iframe>
     </div>
 
 

@@ -94,6 +94,7 @@ public class EquipmentDao {
             return list;
         }catch (Exception e)
         {
+
             e.printStackTrace();
         }
         return null;
@@ -144,12 +145,155 @@ public class EquipmentDao {
     }
 
 
+    public boolean changeEquipmentStatus(String id,String status)
+    {
+        String sql="update bcu_manage.equipment set equ_status=? ,equ_user=''where equ_id=?";
+        Connection conn=util.getConnection();
+        try{
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,status);
+            pstmt.setString(2,id);
+            if(pstmt.executeUpdate()>0)
+            {
+                conn.close();
+                return true;
+            }
+            conn.close();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
+    public boolean useEquipment(String id,String user)
+    {
+        String sql="update bcu_manage.equipment set equ_status=0,equ_user=? where equ_id=?";
+        Connection conn=util.getConnection();
+        try{
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,user);
+            pstmt.setString(2,id);
+            if (pstmt.executeUpdate()>0)
+            {
+                conn.close();
+                return true;
+            }
+            conn.close();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
+    public  ArrayList<Equipment> getAllEquipment()
+    {
+        ArrayList<Equipment> list=new ArrayList<Equipment>();
+        String sql="select * from bcu_manage.equipment";
+        Connection conn= util.getConnection();
+        try {
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs=pstmt.executeQuery();
+            while (rs.next())
+            {
+                Equipment equ=new Equipment();
+                equ.setEquId(rs.getString(1));
+                equ.setEquName(rs.getString(2));
+                equ.setEquModel(rs.getString(3));
+                equ.setEquType(rs.getString(4));
+                equ.setEquFormat(rs.getString(5));
+                equ.setEquPrice(rs.getString(6));
+                equ.setEquMainCount(rs.getString(7));
+                equ.setEquTotalPrice(rs.getString(8));
+                equ.setEquUnit(rs.getString(9));
+                equ.setEquTickNo(rs.getString(10));
+                equ.setEquFactory(rs.getString(11));
+                equ.setEquFactoryNo(rs.getString(12));
+                equ.setEquOutFactoryDate(rs.getString(13));
+                equ.setEquBoughtDate(rs.getString(14));
+                equ.setEquUseDirection(rs.getString(15));
+                equ.setEquStatus(rs.getString(16));
+                equ.setEquManager(rs.getString(17));
+                equ.setEquLocation(rs.getString(18));
+                equ.setEquBelong(rs.getString(19));
+                equ.setEquUser(rs.getString(20));
+                list.add(equ);
+
+            }
+
+            conn.close();
+            return list;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
+    public ArrayList<Equipment> getAllAvailableEquipment()
+    {
+        ArrayList<Equipment> list=new ArrayList<Equipment>();
+        String sql="select * from bcu_manage.equipment where equ_status='1'";
+        Connection conn=util.getConnection();
+        try {
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            ResultSet rs=pstmt.executeQuery();
+            while (rs.next())
+            {
+                Equipment equ=new Equipment();
+                equ.setEquId(rs.getString(1));
+                equ.setEquName(rs.getString(2));
+                equ.setEquModel(rs.getString(3));
+                equ.setEquType(rs.getString(4));
+                equ.setEquFormat(rs.getString(5));
+                equ.setEquPrice(rs.getString(6));
+                equ.setEquMainCount(rs.getString(7));
+                equ.setEquTotalPrice(rs.getString(8));
+                equ.setEquUnit(rs.getString(9));
+                equ.setEquTickNo(rs.getString(10));
+                equ.setEquFactory(rs.getString(11));
+                equ.setEquFactoryNo(rs.getString(12));
+                equ.setEquOutFactoryDate(rs.getString(13));
+                equ.setEquBoughtDate(rs.getString(14));
+                equ.setEquUseDirection(rs.getString(15));
+                equ.setEquStatus(rs.getString(16));
+                equ.setEquManager(rs.getString(17));
+                equ.setEquLocation(rs.getString(18));
+                equ.setEquBelong(rs.getString(19));
+                equ.setEquUser(rs.getString(20));
+                list.add(equ);
+            }
+            conn.close();
+            return list;
+        }catch (Exception e )
+        {e.printStackTrace();}
+        return null;
+    }
+
+
+    public boolean deleteEquipment(String id)
+    {
+        String sql="delete from bcu_manage.equipment where equ_id=?";
+        Connection conn=util.getConnection();
+        try{
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,id);
+            if(pstmt.executeUpdate()>0)
+            {
+                conn.close();
+                return true;
+            }
+                conn.close();
+
+
+        }catch (Exception e)
+        {e.printStackTrace();}
+        return false;
+    }
 
 
 

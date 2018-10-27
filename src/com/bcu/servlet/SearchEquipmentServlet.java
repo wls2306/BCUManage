@@ -29,10 +29,13 @@ public class SearchEquipmentServlet extends HttpServlet {
          * 规定： type
          *    1. 通过名称查找
          *    2. 通过编号查找
+         *    3. 返回全部可用资产
+         *    4. 返回全部资产
          */
         String type=req.getParameter("type");
         String name=req.getParameter("name");
         String id=req.getParameter("id");
+
 
 
 
@@ -44,15 +47,26 @@ public class SearchEquipmentServlet extends HttpServlet {
 
                 System.out.println(list.get(0).getEquName());
 
-
-
-
                 break;
 
             case "2":
                 ArrayList<Equipment> list2=new EquipmentDao().serchEquipmentById(id);
                 session.setAttribute("result",list2);
                 resp.setHeader("refresh","1,url=equRs.jsp");
+                break;
+
+
+            case "3":
+                ArrayList<Equipment> list3=new  EquipmentDao().getAllAvailableEquipment();
+                session.setAttribute("result",list3);
+                resp.setHeader("refresh","0,url=brorrowEqu.jsp");
+                break;
+
+
+            case"4":
+                ArrayList<Equipment> list4=new EquipmentDao().getAllEquipment();
+                session.setAttribute("result",list4);
+                resp.setHeader("refresh","0,url=equRs.jsp");
                 break;
         }
 

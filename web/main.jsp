@@ -122,7 +122,7 @@
                             </div>
 
                             <div id="content">
-                                <iframe name="frame" width="900px" height="800px" src="myinfo.jsp" frameborder="0" scrolling="1">
+                                <iframe name="frame" width="1000px" height="800px" src="myinfo.jsp" frameborder="0" scrolling="1">
                                     您的浏览器不支持HTML5，请升级浏览器再试
                                 </iframe>
 

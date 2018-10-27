@@ -38,6 +38,37 @@
         <servlet-name>SearchEqu</servlet-name>
         <url-pattern>/doSearchEqu</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ChangeEquStatus</servlet-name>
+        <servlet-class>com.bcu.servlet.ChangeEquStatusServlet</servlet-class>
+        
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>ChangeEquStatus</servlet-name>
+        <url-pattern>/changeEquStatus</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CreateRequest</servlet-name>
+        <servlet-class>com.bcu.servlet.CreateRequestServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateRequest</servlet-name>
+        <url-pattern>/createreq</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GetRequestServlet</servlet-name>
+        <servlet-class>com.bcu.servlet.GetRequestServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>GetRequestServlet</servlet-name>
+        <url-pattern>/getreq</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
 
