@@ -29,7 +29,7 @@ public class GetRequestServlet extends HttpServlet {
          *
          */
         String username=user.getUserName();
-        String level=req.getParameter("level");
+        String level=user.getUserType()+"";
 
         switch (type){
             case "1":
@@ -38,7 +38,9 @@ public class GetRequestServlet extends HttpServlet {
                 resp.setHeader("refresh","0,url=myrequest.jsp");
                 break;
             case "2":
-
+                ArrayList<Request> list2=new RequestDao().getRequestByLevel(level);
+                session.setAttribute("request",list2);
+                resp.setHeader("refresh","0,url=handleRequest.jsp");
                 break;
         }
 

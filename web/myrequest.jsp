@@ -41,7 +41,7 @@
 
 
         <c:if test="${request==null||fn:length(request)<1}">
-            <td colspan="8" align="center" > 未找到相应信息 </td>
+            <td colspan="9" align="center" > 未找到相应信息 </td>
 
         </c:if>
 

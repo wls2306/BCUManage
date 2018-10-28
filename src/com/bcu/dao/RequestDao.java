@@ -42,7 +42,7 @@ public class RequestDao {
     public ArrayList<Request> getRequestByLevel(String level)
     {
         ArrayList<Request> list=new ArrayList<Request>();
-        String sql="select * from bcu_manage.request where req_approval_level=?";
+        String sql="select * from bcu_manage.request where req_approval_level=? and req_status='0' or req_status='2'";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -112,7 +112,7 @@ public class RequestDao {
 
     public boolean agreeRequest(String id,String back,String auditor,String time)
     {
-        String sql="update bcu_manage.request set req_status='1',req_back=?,req_auditor=?,req_handle_time where req_id=?";
+        String sql="update bcu_manage.request set req_status='1',req_back=?,req_auditor=?,req_handle_time=? where req_id=?";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -136,7 +136,7 @@ public class RequestDao {
 
     public boolean rejectRequest(String id,String back,String auditor,String time)
     {
-        String sql="update bcu_manage.request set req_status='-1',req_back=?,req_auditor=?,req_handle_time where req_id=?";
+        String sql="update bcu_manage.request set req_status='-1',req_back=?,req_auditor=?,req_handle_time=? where req_id=?";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -157,7 +157,7 @@ public class RequestDao {
     }
 
     public boolean upRequestLevel(String id,String back,String auditor,String time,String level) {
-        String sql = "update bcu_manage.request set req_stasus='2',req_back=?,req_auditor=?,req_handle_time=?,req_approval_level=? where req_id=?";
+        String sql = "update bcu_manage.request set req_status='2',req_back=?,req_auditor=?,req_handle_time=?,req_approval_level=? where req_id=?";
         Connection conn = util.getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);

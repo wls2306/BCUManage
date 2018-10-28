@@ -35,6 +35,13 @@ public class ChangeRequestServlet extends HttpServlet {
         String level=req.getParameter("level");
         String time= util.getTime();
 
+        System.out.println("CR:"+type);
+        System.out.println("CR:"+id);
+
+
+
+
+
         switch (type)
         {
             case "1":

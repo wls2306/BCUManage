@@ -70,5 +70,15 @@
         <url-pattern>/getreq</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ChangeRequestServlet</servlet-name>
+        <servlet-class>com.bcu.servlet.ChangeRequestServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ChangeRequestServlet</servlet-name>
+        <url-pattern>/changereq</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
 
