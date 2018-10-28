@@ -156,5 +156,26 @@ public class RequestDao {
         return false;
     }
 
+    public boolean upRequestLevel(String id,String back,String auditor,String time,String level) {
+        String sql = "update bcu_manage.request set req_stasus='2',req_back=?,req_auditor=?,req_handle_time=?,req_approval_level=? where req_id=?";
+        Connection conn = util.getConnection();
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, back);
+            pstmt.setString(2, auditor);
+            pstmt.setString(3, time);
+            pstmt.setString(4, level);
+            pstmt.setString(5,id);
+            if (pstmt.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return false;
+    }
 
 }
