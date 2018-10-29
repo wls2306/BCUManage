@@ -1,6 +1,8 @@
 package com.bcu.servlet;
 
+import com.bcu.dao.MenuDao;
 import com.bcu.dao.UserDao;
+import com.bcu.entity.Menu;
 import com.bcu.entity.User;
 
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * 登陆验证
@@ -32,6 +35,11 @@ public class LoginServlet extends HttpServlet {
 
          if(user!=null) {
              session.setAttribute("user", user);
+
+             ArrayList<Menu> list =new MenuDao().GetMenu();
+
+             session.setAttribute("menuList",list);
+
              resp.sendRedirect("main.jsp");
          }
          else

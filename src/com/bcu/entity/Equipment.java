@@ -14,12 +14,31 @@ public class Equipment {
     private String equFactory;//生产厂家
     private String equFactoryNo;//出厂号
     private String equOutFactoryDate;//出厂日期
-    private String equBroughtDate;//购置日期
+    private String equBoughtDate;//购置日期
     private String equUseDirection;//使用方向
     private String equStatus;//状态
+
+    /***
+     *  1:可用
+     *  0.不可用
+     *  -1.损坏（维修）
+     */
     private String equManager;//管理人
     private String equLocation;//存放位置
     private String equBelong;//归属
+    private String equUser;//当前使用者
+
+
+
+    public String getEquUser() {
+        return equUser;
+    }
+
+    public void setEquUser(String equUser) {
+        this.equUser = equUser;
+    }
+
+
 
     public String getEquId() {
         return equId;
@@ -125,12 +144,12 @@ public class Equipment {
         this.equOutFactoryDate = equOutFactoryDate;
     }
 
-    public String getEquBroughtDate() {
-        return equBroughtDate;
+    public String getEquBoughtDate() {
+        return equBoughtDate;
     }
 
-    public void setEquBroughtDate(String equBroughtDate) {
-        this.equBroughtDate = equBroughtDate;
+    public void setEquBoughtDate(String equBoughtDate) {
+        this.equBoughtDate = equBoughtDate;
     }
 
     public String getEquUseDirection() {

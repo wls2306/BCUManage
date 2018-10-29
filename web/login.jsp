@@ -122,8 +122,8 @@
 
 
 <script>
-	$("#submit").click( function () {
-		$("#loginform").submit();
+	$('#submit').click( function () {
+		$('#loginform').submit();
     } )
 
 </script>

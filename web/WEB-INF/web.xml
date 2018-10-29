@@ -18,5 +18,67 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>addEqu</servlet-name>
+        <servlet-class>com.bcu.servlet.AddEquipmentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addEqu</servlet-name>
+        <url-pattern>/addEqu</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>SearchEqu</servlet-name>
+        <servlet-class>com.bcu.servlet.SearchEquipmentServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>SearchEqu</servlet-name>
+        <url-pattern>/doSearchEqu</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ChangeEquStatus</servlet-name>
+        <servlet-class>com.bcu.servlet.ChangeEquStatusServlet</servlet-class>
+        
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ChangeEquStatus</servlet-name>
+        <url-pattern>/changeEquStatus</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CreateRequest</servlet-name>
+        <servlet-class>com.bcu.servlet.CreateRequestServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateRequest</servlet-name>
+        <url-pattern>/createreq</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GetRequestServlet</servlet-name>
+        <servlet-class>com.bcu.servlet.GetRequestServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>GetRequestServlet</servlet-name>
+        <url-pattern>/getreq</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ChangeRequestServlet</servlet-name>
+        <servlet-class>com.bcu.servlet.ChangeRequestServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ChangeRequestServlet</servlet-name>
+        <url-pattern>/changereq</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
 
