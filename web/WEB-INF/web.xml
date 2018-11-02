@@ -80,5 +80,15 @@
         <url-pattern>/changereq</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>demo</servlet-name>
+        <servlet-class>com.bcu.servlet.datademo</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>demo</servlet-name>
+        <url-pattern>/demo</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
 

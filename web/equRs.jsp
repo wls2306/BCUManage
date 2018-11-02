@@ -13,12 +13,34 @@
 <head>
     <title>资产查询结果</title>
 </head>
-<script src="script/jquery-3.3.1.js">
-</script>
+<script src="script/jquery-3.3.1.js"></script>
 
-<script>
+<!-- 引入bootstrap样式 -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<!-- 引入bootstrap-table样式 -->
+<link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css" rel="stylesheet">
 
-</script>
+<!-- jquery -->
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- bootstrap-table.min.js -->
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<!-- 引入中文语言包 -->
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<script src="script/tableExport.js"></script>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+
 
 <style type="text/css">
 
@@ -35,9 +57,7 @@
 <body>
     <h2>资产查询结果</h2>
 
-    <div id="rstable">
-        <table  border="1" cellspacing="0" cellpadding="10">
-            <tr>
+    <!--
                 <th>编号</th>
                 <th>名称</th>
                 <th>使用方向</th>
@@ -45,62 +65,21 @@
                 <th>状态</th>
                 <th>使用者</th>
                 <th>操作</th>
-
-            </tr>
-
-            <c:if test="${result==null||fn:length(result)<1}">
-                <td colspan="7" align="center" > 未找到相应信息 </td>
-
-            </c:if>
-            <c:forEach var="items" items="${result}">
-
-                <tr>
-
-
-                <td> ${items.equId}</td>
-                <td> ${items.equName}</td>
-                <td> ${items.equUseDirection}</td>
-                <td> ${items.equLocation}</td>
-                <td>
-                    <c:choose>
-                        <c:when test="${items.equStatus eq '1'}">
-                            空闲
-                        </c:when>
-
-                        <c:when test="${items.equStatus eq '0'}">
-                            占用
-                        </c:when>
-
-                        <c:when test="${items.equStatus eq '-1'}">
-                            维修中
-                        </c:when>
-
-                    </c:choose>
-
-                </td>
-
-                    <td>${items.equUser}</td>
-
-                <td>
-                    <button class="look" bind="${items.equId}">详情</button>
-                    <button class="remark"  bind="${items.equId}"  id="remark">修改状态</button>
-
-                    <button class="repair"  bind="${items.equId}">申请维修</button>
-                    <button  class="scrap"  bind="${items.equId}">申请报废</button>
-                    <button  class="delete" bind="${items.equId}">删除资产</button>
-                </td>
-
-                </tr>
-
-            </c:forEach>
+     -->
 
 
 
-        </table>
 
 
-
+    <div id="rstable">
+        <table id="table"></table>
     </div>
+
+
+
+
+
+
 
 
     <div id="changestatus" >

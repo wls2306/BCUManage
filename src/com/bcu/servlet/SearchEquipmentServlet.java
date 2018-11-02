@@ -2,6 +2,7 @@ package com.bcu.servlet;
 
 import com.bcu.dao.EquipmentDao;
 import com.bcu.entity.Equipment;
+import net.sf.json.JSONArray;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +23,10 @@ public class SearchEquipmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
+        resp.setContentType("text/json;charset=utf-8");
         HttpSession session=req.getSession();
         PrintWriter out=resp.getWriter();
-        out.println("查询中...");
+      //  out.println("查询中...");
         /**
          * 规定： type
          *    1. 通过名称查找
@@ -58,8 +60,12 @@ public class SearchEquipmentServlet extends HttpServlet {
 
             case "3":
                 ArrayList<Equipment> list3=new  EquipmentDao().getAllAvailableEquipment();
-                session.setAttribute("result",list3);
-                resp.setHeader("refresh","0,url=brorrowEqu.jsp");
+                JSONArray ja=JSONArray.fromObject(list3);
+                out.print(ja);
+
+
+             //   session.setAttribute("result",list3);
+             //   resp.setHeader("refresh","0,url=brorrowEqu.jsp");
                 break;
 
 
