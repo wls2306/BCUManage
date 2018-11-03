@@ -145,14 +145,15 @@ public class EquipmentDao {
     }
 
 
-    public boolean changeEquipmentStatus(String id,String status)
+    public boolean changeEquipmentStatus(String id,String status,String user)
     {
-        String sql="update bcu_manage.equipment set equ_status=? ,equ_user=''where equ_id=?";
+        String sql="update bcu_manage.equipment set equ_status=? ,equ_user=?where equ_id=?";
         Connection conn=util.getConnection();
         try{
             PreparedStatement pstmt=conn.prepareStatement(sql);
             pstmt.setString(1,status);
-            pstmt.setString(2,id);
+            pstmt.setString(2,user);
+            pstmt.setString(3,id);
             if(pstmt.executeUpdate()>0)
             {
                 conn.close();
@@ -295,7 +296,26 @@ public class EquipmentDao {
         return false;
     }
 
-
+    public String getEquipmentNameById(String id)
+    {
+        String sql="select * from bcu_manage.equipment where equ_id=?";
+        Connection conn=util.getConnection();
+        try {
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,id);
+            ResultSet rs=pstmt.executeQuery();
+            String name="";
+            while (rs.next())
+            {
+                name=rs.getString("equ_name");
+            }
+            return name;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return "none";
+    }
 
 
 

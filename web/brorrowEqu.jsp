@@ -35,7 +35,9 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-
+<!-- 对话框  -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 
 
 <style>
@@ -75,9 +77,25 @@
 
     window.operateEvents={
         "click .submit":function (e,value,row,index) {
-            var r=confirm("请确认您的借用信息！\n资产编号："+row.equId+"\n资产名称："+row.equName);
-            if(r)
-                submit(10,row.equId,row.equName);
+            BootstrapDialog.confirm({
+                title: '确认您的申请信息',
+                message: "请确认您的借用信息！\n资产编号：" +row.equId+"\n资产名称："+row.equName,
+                type: BootstrapDialog.TYPE_PRIMARY, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+                closable: true, // <-- Default value is false
+                draggable: true, // <-- Default value is false
+                btnCancelLabel: '取消', // <-- Default value is 'Cancel',
+                btnOKLabel: '确认', // <-- Default value is 'OK',
+                btnOKClass: 'btn-primary', // <-- If you didn't specify it, dialog type will be used,
+                callback: function(result) {
+                    // result will be true if button was click, while it will be false if users close the dialog directly.
+                    if(result)
+                        submit(10,row.equId,row.equName);
+
+                }
+            });
+
+
+
 
         }
     }
@@ -135,7 +153,7 @@
     function addFunctionAlty(value,row,index)
     {
         return [
-            '<button id="submit" type="button" class="btn btn-default submit">申请</button>',
+            '<button id="submit" type="button" class="btn btn-primary submit">申请</button>',
         ].join('');
 
     }
@@ -149,14 +167,14 @@
     var submit=function submit(type,goalid,goalname) {
             $.post(
                 "createreq",{
-                    type:10,
+                    type:11,
                     goalid:goalid,
                     goalname:goalname,
                     content:"对"+goalname+"的借用申请",
                     level:"2",
                     initiator:"${user.userName}"
                 },function (data) {
-                    alert(data);
+                    BootstrapDialog.alert(data);
                 }
             )
     }

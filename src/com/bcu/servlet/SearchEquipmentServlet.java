@@ -45,23 +45,22 @@ public class SearchEquipmentServlet extends HttpServlet {
             case "1":
                 ArrayList<Equipment> list=new EquipmentDao().serchEquipmentByName(name);
                 session.setAttribute("result",list);
-                resp.setHeader("refresh","1,url=equRs.jsp");
-
-                System.out.println(list.get(0).getEquName());
-
+                JSONArray ja1=JSONArray.fromObject(list);
+                out.print(ja1);
                 break;
 
             case "2":
                 ArrayList<Equipment> list2=new EquipmentDao().serchEquipmentById(id);
-                session.setAttribute("result",list2);
-                resp.setHeader("refresh","1,url=equRs.jsp");
+                JSONArray ja2=JSONArray.fromObject(list2);
+                out.print(ja2);
+
                 break;
 
 
             case "3":
                 ArrayList<Equipment> list3=new  EquipmentDao().getAllAvailableEquipment();
-                JSONArray ja=JSONArray.fromObject(list3);
-                out.print(ja);
+                JSONArray ja3=JSONArray.fromObject(list3);
+                out.print(ja3);
 
 
              //   session.setAttribute("result",list3);
@@ -71,8 +70,9 @@ public class SearchEquipmentServlet extends HttpServlet {
 
             case"4":
                 ArrayList<Equipment> list4=new EquipmentDao().getAllEquipment();
-                session.setAttribute("result",list4);
-                resp.setHeader("refresh","0,url=equRs.jsp");
+                JSONArray ja4=JSONArray.fromObject(list4);
+                out.print(ja4);
+
                 break;
         }
 

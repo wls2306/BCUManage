@@ -38,15 +38,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
+<!-- 对话框  -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+
 
 
 
 
 <style type="text/css">
 
-    table{
-
-        border-collapse: collapse;
+    #rstable{
+        margin-left: 10px;
     }
 
 </style>
@@ -115,6 +118,157 @@
 
 <script>
 
+    window.operateEvents= {
+        "click .details": function (e, value, rows, index) {
+            BootstrapDialog.alert("功能正在开发中！")
+        },
+
+        "click .delete":function (e,value,rows,idex) {
+            BootstrapDialog.confirm({
+                title: "确认删除该资产信息？",
+                message: '请确认你将要删除的资产信息\n资产编号：'+rows.equId+"",
+                type: BootstrapDialog.TYPE_DANGER, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+                closable: true, // <-- Default value is false
+                draggable: true, // <-- Default value is false
+                btnCancelLabel: '取消', // <-- Default value is 'Cancel',
+                btnOKLabel: '确认', // <-- Default value is 'OK',
+                btnOKClass: 'btn-danger', // <-- If you didn't specify it, dialog type will be used,
+                callback: function(result ) {
+                    // result will be true if button was click, while it will be false if users close the dialog directly.
+                    if(result) {
+                        alert(rows.equId);
+                        deleteEqu(rows.equId);
+                    }
+                }
+            })
+        },
+
+
+        "click .change":function (e,value,rows,idex,status) {
+            BootstrapDialog.show({
+                  title:"修改当前资产的使用状态"  ,
+                  message:$('<span>当前选择的资产ID：</span>\n' +
+                      '        <div> 请选择要修改的状态\n' +
+                      '                     \n' +
+                      '\n' +
+                      '               <select id="status">\n' +
+                      '                   <option value="-1">维修</option>\n' +
+                      '                   <option value="0">占用</option>\n' +
+                      '                   <option value="1">空闲</option>\n' +
+                      '               </select>\n' +
+                      '\n' +
+                      '            <br>\n' +
+                      '            \n' +
+                      '            <div id="inputuser" >使用人：<input type="text" name="user" id="user"></div>\n' +
+                      '\n' +
+
+                      '\n' +
+                      '        </div>\n')  ,
+                data:{
+                      "status":status,
+                        "user":$("#user").val(),
+                        "id":rows.equId,
+                },
+                buttons:[
+                    {
+                        label:"提交",
+                        icon: 'glyphicon glyphicon-check',
+                        cssClass: 'btn-primary',
+                        action:function (dialogRef) {
+                            submit(1,dialogRef.getData("status"),dialogRef.getData("id"));
+                            dialogRef.close();
+                        }
+                    }
+
+                ]
+
+
+
+
+                })
+
+        }
+
+
+
+    }
+
+
+
+
+    $('#table').bootstrapTable({
+
+        url: 'doSearchEqu?type=4',         //请求后台的URL（*）
+        method: 'get',                      //请求方式（*）
+        toolbar: '#toolbar',                //工具按钮用哪个容器
+        striped: true,                      //是否显示行间隔色
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortOrder: "asc",                   //排序方式
+        //    queryParams: oTableInit.queryParams,//传递参数（*）
+        sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1,                       //初始化加载第一页，默认第一页
+        pageSize: 5,                       //每页的记录行数（*）
+        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        showColumns: true,                  //是否显示所有的列
+        showRefresh: true,                  //是否显示刷新按钮
+        minimumCountColumns: 2,             //最少允许的列数
+        // clickToSelect: true,                //是否启用点击选中行
+        height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        uniqueId: "equId",                     //每一行的唯一标识，一般为主键列
+        showExport: true,                     //是否显示导出
+        exportDataType: "basic",
+        columns: [ {
+            field:'equId',
+            title:'编号',
+            align:'center'
+        },{
+            field:'equName',
+            title:'名称',
+            align:'center'
+        },{
+            field:'equUseDirection',
+            title:'方向',
+            align:'center'
+        },{
+            field:'equLocation',
+            title:'存放位置',
+            align:'center'
+        },{
+            field:'equStatus',
+            title:'状态',
+            align:'center'
+        },{
+            field:'equUser',
+            title:'使用人',
+            align:'center'
+        },{
+            field: 'operation',
+            title: '操作',
+            align: 'center',
+            events:operateEvents,//给按钮注册事件
+            formatter:addFunctionAlty//表格中增加按钮
+        }]
+    });
+
+
+    function addFunctionAlty(value,row,index)
+    {
+        return [
+            '<button id="details" type="button" class="btn btn-info btn-sm details">详情</button>',
+            '<button id="change" type="button" class="btn btn-primary btn-sm  change">修改状态</button>',
+            '<button id="fix" type="button" class="btn btn-warning btn-sm fix">申请维修</button>',
+            '<button id="scrap" type="button" class="btn btn-warning btn-sm scrap">申请报废</button>',
+            '<button id="delete" type="button" class="btn btn-danger btn-sm delete">删除资产</button>',
+        ].join('');
+
+    }
+
+
+
+
+
     var type=1;
 
     $(document).ready(function () {
@@ -129,17 +283,11 @@
 
         $("#statussubmit").click(submit);
 
+        var status=1;
         $("#status").change(function () {
             var v=$(this).val();
+            status=v;
 
-            if(v=="0") {
-                type = 2;
-                inputuserappear();
-            }
-        else {
-                type = 1;
-                $("#inputuser").hide();
-            }
         })
 
 
@@ -160,16 +308,20 @@
 
 
 
-   var submit= function submit() {
+   function submit(type,status,id,user) {
+
+        alert(type,status,id,user);
+
+
         $.get("changeEquStatus",
             {
                 type:type,
-                status:$("#status").val(),
-                id:$("#chooseid").text(),
-                user:$("#user").val()
+                status:status,
+                id:id,
+                user:user
             },function (data) {
-                alert(data);
-                window.location.href=document.referrer;
+                BootstrapDialog.alert(data);
+                $("#table").bootstrapTable("refresh");
 
             }
         )
@@ -187,14 +339,14 @@
 
 
 
-    var deleteequ=function () {
+    function deleteEqu(id) {
     //    alert($("#deleteid").val());
         $.get("changeEquStatus", {
                 type:"3",
-                id:$("#deleteid").val()
+                id:id
             }, function (data) {
-                alert(data);
-                window.location.href=document.referrer;
+            BootstrapDialog.alert(data);
+            $("#table").bootstrapTable("refresh");
             }
         )}
 

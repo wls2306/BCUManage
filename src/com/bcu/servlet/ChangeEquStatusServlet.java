@@ -32,7 +32,7 @@ public class ChangeEquStatusServlet extends HttpServlet {
         System.out.println(user);
        switch (type){
            case "1":
-               boolean rs=new EquipmentDao().changeEquipmentStatus(id,status);
+               boolean rs=new EquipmentDao().changeEquipmentStatus(id,status,user);
                if(rs)
                    out.println("修改成功");
                else
