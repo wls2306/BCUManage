@@ -2,6 +2,7 @@ package com.bcu.servlet;
 
 import com.bcu.dao.EquipmentDao;
 import com.bcu.entity.Equipment;
+import com.bcu.entity.User;
 import net.sf.json.JSONArray;
 
 import javax.servlet.ServletException;
@@ -25,6 +26,7 @@ public class SearchEquipmentServlet extends HttpServlet {
         resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/json;charset=utf-8");
         HttpSession session=req.getSession();
+        User user=(User)session.getAttribute("user");
         PrintWriter out=resp.getWriter();
       //  out.println("查询中...");
         /**
@@ -33,10 +35,12 @@ public class SearchEquipmentServlet extends HttpServlet {
          *    2. 通过编号查找
          *    3. 返回全部可用资产
          *    4. 返回全部资产
+         *    5 .通过用户名查找资产
          */
         String type=req.getParameter("type");
         String name=req.getParameter("name");
         String id=req.getParameter("id");
+        String username=user.getUserName();
 
 
 
@@ -73,6 +77,14 @@ public class SearchEquipmentServlet extends HttpServlet {
                 JSONArray ja4=JSONArray.fromObject(list4);
                 out.print(ja4);
 
+                break;
+
+
+
+            case "5":
+                ArrayList<Equipment> list5=new EquipmentDao().serchEquipmentByUser(username);
+                JSONArray ja5=JSONArray.fromObject(list5);
+                out.print(ja5);
                 break;
         }
 

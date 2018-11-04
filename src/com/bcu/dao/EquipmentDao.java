@@ -318,6 +318,32 @@ public class EquipmentDao {
     }
 
 
+    public ArrayList<Equipment> serchEquipmentByUser(String username){
+          Equipment eq=new Equipment();
+          ArrayList<Equipment> list=new ArrayList<Equipment>();
+          String sql="select * from bcu_manage.equipment where equ_user=?";
+          Connection conn= util.getConnection();
+          try {
+              PreparedStatement pstmt=conn.prepareStatement(sql);
+              pstmt.setString(1,username);
+              ResultSet rs=pstmt.executeQuery();
+              while (rs.next())
+              {
+                  eq.setEquId(rs.getString("equ_id"));
+                  eq.setEquName(rs.getString("equ_name"));
+                  eq.setEquUseDirection(rs.getString("equ_use_direction"));
+                  list.add(eq);
+              }
+              conn.close();
+              return list;
+          }catch (Exception e)
+          {
+              e.printStackTrace();
+          }
+          return null;
+    }
+
+
 
 
 }
