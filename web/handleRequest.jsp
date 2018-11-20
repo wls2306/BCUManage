@@ -57,6 +57,7 @@
     <span id="type" hidden></span>
     <span id="initiator" hidden></span>
     <span id="auditor"  hidden></span>
+    <span id="content" hidden></span>
     <div id="tableArea" >
     <table id="table"></table>
     </div>
@@ -102,7 +103,7 @@
                     <h4 class="modal-title" id="upModalLabel">将该请求移交上级</h4>
                 </div>
                 <div class="modal-body">
-                    <div>请选择处理人的权限  <select id="access">
+                    <div>请选择处理人的权限:  <select id="access">
                             <option value="2">设备管理员</option>
                             <option value="3">专业秘书</option>
                             <option value="4">最高管理员</option>
@@ -114,7 +115,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" >提交</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="upsubmit()" >提交</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -133,6 +134,7 @@
             $("#reqId").text(rows.reqId);
             $("#goalid").text(rows.reqGoalId);
             $("#type").text(rows.reqType);
+            $("#content").text(rows.reqContent);
             $("#initiator").text(rows.reqInitiator);
             $("#auditor").text("${user.userName}");
             BootstrapDialog.confirm(
@@ -161,6 +163,7 @@
             $("#goalid").text(rows.reqGoalId);
             $("#type").text(rows.reqType);
             $("#initiator").text(rows.reqInitiator);
+            $("#content").text(rows.reqContent);
             $("#auditor").text("${user.userName}");
             $("#rejectModel").modal(open);
         },
@@ -170,9 +173,15 @@
             $("#goalid").text(rows.reqGoalId);
             $("#type").text(rows.reqType);
             $("#initiator").text(rows.reqInitiator);
+            $("#content").text(rows.reqContent);
             $("#auditor").text("${user.userName}");
             $("#upModel").modal(open);
         }
+
+
+
+
+
         
     }
         
@@ -273,6 +282,7 @@
                 {
                     type: $("#type").text(),
                     goalId: $("#goalid").text(),
+                    content:$("#content").text(),
                     auditor: $("#auditor").text(),
                     initiator: $("#initiator").text()
                 },
@@ -297,19 +307,44 @@
                 {
                     type: "2",
                     id: $("#reqId").text(),
-                    back: $("#refusereason").text(),
+                    back: $("#refusereason").val(),
                     auditor: $("#auditor").text()
                 },
                 function (data) {
                     BootstrapDialog.show({
-                        title:"反馈",
-                       message: "请求状态修改服务器反馈：" + data
+                        title: "反馈",
+                        message: "请求状态修改服务器反馈：" + data
                     });
                     $("#table").bootstrapTable('refresh');
                 }
             )
+        }
+            
+            
+            function upsubmit() {
+                //
+                $.get(
+                    "changereq",
+                    {
+                        type: "3",
+                        id: $("#reqId").text(),
+                        back: $("#refusereason").val(),
+                        level:$("#access").val(),
+                        content:$("#content").text(),
+                        auditor: $("#auditor").text()
+                    },
+                    function (data) {
+                        BootstrapDialog.show({
+                            title:"反馈",
+                            message: "请求状态修改服务器反馈：" + data
+                        });
+                        $("#table").bootstrapTable('refresh');
+                    }
+                )
 
         }
+        
+        
 
 
 

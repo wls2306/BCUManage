@@ -90,5 +90,17 @@
         <url-pattern>/handlereq</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>HandlePartsServlet</servlet-name>
+        <servlet-class>com.bcu.servlet.HandlePartsServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>HandlePartsServlet</servlet-name>
+        <url-pattern>/handleparts</url-pattern>
+    </servlet-mapping>
+    
+    
+    
 </web-app>
 

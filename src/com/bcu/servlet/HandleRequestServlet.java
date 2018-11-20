@@ -1,7 +1,9 @@
 package com.bcu.servlet;
 
+import com.bcu.dao.BrPartRecordDao;
 import com.bcu.dao.BrRecordDao;
 import com.bcu.dao.EquipmentDao;
+import com.bcu.dao.PartsDao;
 import com.bcu.util.util;
 
 import javax.servlet.ServletException;
@@ -25,6 +27,7 @@ public class HandleRequestServlet extends HttpServlet {
         String goalId=req.getParameter("goalId");
         String initiator=req.getParameter("initiator");
         String auditor=req.getParameter("auditor");
+        String content=req.getParameter("content");
         String date= util.getTime();
 
 
@@ -67,6 +70,27 @@ public class HandleRequestServlet extends HttpServlet {
                 if(rs3&&rs4)
                     out.println("操作成功");
                 break;
+
+                //
+            case "21":
+
+                int balance=new PartsDao().getCount(goalId);
+                String data[]=content.split("#");
+                int count= Integer.valueOf(data[1]);
+
+                balance-=count;
+
+                boolean rs21_1=new PartsDao().changeCount(goalId,balance+"");
+               // boolean rs21_2=new BrPartRecordDao().insertParts("",goalId,"","1",initiator,auditor,date,count+"");
+
+                if (rs21_1)
+                    out.print("操作成功，配件数量 -"+count);
+                else
+                    out.print("操作失败");
+                break;
+
+
+
         }
 
 

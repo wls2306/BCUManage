@@ -51,7 +51,7 @@
 	
 	#login{
 	/*	border: 1px solid #00AAF1;*/
-		width: 250px;
+		width: 280px;
 	/*	background-color: #0EECFF;*/
 	/*	border-radius: 10px;*/
 		margin-top: 110px;

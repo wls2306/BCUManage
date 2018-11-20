@@ -3,7 +3,7 @@ package com.bcu.entity;
 public class Menu {
     private String menuId;
     private String menuName;
-    private String menuType;
+    private String menuType;//1为普通目录项 2为黑体加粗
     private String menuStatus;
     private String menuUrl;
 
