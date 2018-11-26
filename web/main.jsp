@@ -91,7 +91,32 @@
     <div id="all">
             <div id="title">
                 <span id="title-1">北京城市学院资产管理系统</span>
-                <span id="title-2">欢迎你！[ ${user.userType} ] ${user.userName}</span>
+                <span id="title-2">欢迎你！[<c:choose>
+                    <c:when test="${user.userType eq '1'}">
+                        <span style="color: blue;">教师</span>
+                    </c:when>
+
+                    <c:when test="${user.userType eq '2'}">
+                        <span style="color: green;">设备管理员</span>
+                    </c:when>
+
+                    <c:when test="${user.userType eq '3'}">
+                        <span style="color:#CC00CC;">专业秘书</span>
+                    </c:when>
+
+                    <c:when test="${user.userType eq '4'}">
+                        <span style="color:red;">专业主任</span>
+                    </c:when>
+
+                    <c:when test="${user.userType eq '5'}">
+                        <span style="color:deeppink;">实践中心主任</span>
+                    </c:when>
+
+                    <c:when test="${user.userType eq '6'}">
+                        <span style="color:pink;">系统管理员</span>
+                    </c:when>
+
+                </c:choose> ] ${user.userName}</span>
             </div>
             <div id="main">
                <!-- <nav id="nav"> </nav>   顶部导航栏 ，暂不使用 -->
@@ -112,9 +137,6 @@
                                                                 
                                                             </div>
                                                         </c:when>
-
-
-
 
                                                     </c:choose>
                                             </c:forEach>
